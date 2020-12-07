@@ -1,0 +1,5 @@
+/Users/user/Dev/WebApp/SampleApp/WebApi/obj/Release/netcoreapp3.1/WebApi.csprojAssemblyReference.cache
+/Users/user/Dev/WebApp/SampleApp/WebApi/obj/Release/netcoreapp3.1/WebApi.AssemblyInfoInputs.cache
+/Users/user/Dev/WebApp/SampleApp/WebApi/obj/Release/netcoreapp3.1/WebApi.AssemblyInfo.cs
+/Users/user/Dev/WebApp/SampleApp/WebApi/obj/Release/netcoreapp3.1/WebApi.csproj.CoreCompileInputs.cache
+/Users/user/Dev/WebApp/SampleApp/WebApi/obj/Release/netcoreapp3.1/WebApi.MvcApplicationPartsAssemblyInfo.cache
