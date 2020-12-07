@@ -1,0 +1,5 @@
+WebApi/bin
+WebApi/.vscode
+WebApi/obj/
+WebApi/bin/
+WebApi/*.sql
