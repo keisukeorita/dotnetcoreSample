@@ -3,3 +3,8 @@ WebApi/.vscode
 WebApi/obj/
 WebApi/bin/
 WebApi/*.sql
+Blazor/bin
+Blazor/.vscode
+Blazor/obj/
+Blazor/bin/
+Blazor/*.sql
