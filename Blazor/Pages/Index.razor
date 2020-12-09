@@ -1,0 +1,62 @@
+﻿@page "/"
+@inject HttpClient Http
+@using System.Net.Http
+
+@if (editGuest == null)
+{
+    <p>Guests Not found.</p>
+}
+else
+{
+    <h4>Guest Information</h4>
+    <EditForm Model="@editGuest" >
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <p>
+        <label>
+            Name:<BR/>
+            <InputText id="name" @bind-Value="editGuest.Name" />
+        </label>
+        <label>
+            Tel:<BR/>
+            <InputText id="Tel" @bind-Value="editGuest.Tel" />
+        </label>
+        <label>
+            Address:<BR/>
+            <InputText id="Address" @bind-Value="editGuest.Address" />
+        </label>
+        <label>
+            Mail:<BR/>
+            <InputText id="Mail" @bind-Value="editGuest.Mail" />
+        </label>
+    </p>
+
+    <button type="submit">Submit</button>
+    </EditForm>
+}
+
+@code {
+    private Guest editGuest = new Guest();
+    protected override async Task OnInitializedAsync() => editGuest = await Http.GetFromJsonAsync<Guest>("api/Guest/1/");
+    
+    private void EditItem(long id)
+    {
+        editGuest = Guests.Single(i => i.id == id);
+        editRowStyle = "table-row";
+    }
+
+    private async Task SaveItem()
+    {
+        await Http.PutAsJsonAsync($"/{editGuest.id}", editGuest);
+        //await GetGuest();
+        editRowStyle = "none";
+    }
+    public class Guest
+    {
+        public int id {get;set;}
+        public string Name {get;set;}
+        public string Tel {get;set;}
+        public string Address {get;set;}
+        public string Mail {get;set;}
+    }
+}
