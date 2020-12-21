@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/{Id:int}"
 @inject HttpClient Http
 @using System.Net.Http
 
@@ -12,38 +12,36 @@ else
     <EditForm Model="@editGuest" >
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <p>
-        <label>
-            Name:<BR/>
-            <InputText id="name" @bind-Value="editGuest.Name" />
-        </label>
-        <label>
-            Tel:<BR/>
-            <InputText id="Tel" @bind-Value="editGuest.Tel" />
-        </label>
-        <label>
-            Address:<BR/>
-            <InputText id="Address" @bind-Value="editGuest.Address" />
-        </label>
-        <label>
-            Mail:<BR/>
-            <InputText id="Mail" @bind-Value="editGuest.Mail" />
-        </label>
-    </p>
+    <form>
+        <div class="form-group  col-md-6">
+            <label for="name">Name</label>
+            <InputText id="name" class="form-control" @bind-Value="editGuest.Name" />
+        </div>
+        <div class="form-group  col-md-6">
+            <label for="Tel">Tel</label>
+            <InputText id="Tel" class="form-control" @bind-Value="editGuest.Tel" />
+        </div>
+        <div class="form-group  col-md-6">
+            <label for="Address">Address</label>
+            <InputText id="Address" class="form-control" @bind-Value="editGuest.Address" />
+        </div>
+        <div class="form-group  col-md-6">
+            <label for="Mail">Mail</label>
+            <InputText id="Mail" class="form-control" @bind-Value="editGuest.Mail" />
+        </div>
+    </form>
 
-    <button type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit">Submit</button>
     </EditForm>
 }
 
 @code {
+
+    [Parameter]
+    public Int32 Id { get; set; }
     private Guest editGuest = new Guest();
-    protected override async Task OnInitializedAsync() => editGuest = await Http.GetFromJsonAsync<Guest>("api/Guest/1/");
-    
-    private void EditItem(long id)
-    {
-        editGuest = Guests.Single(i => i.id == id);
-        editRowStyle = "table-row";
-    }
+    protected override async Task OnInitializedAsync() => editGuest = await Http.GetFromJsonAsync<Guest>("api/Guest/" + Id.ToString());
+    /*    
 
     private async Task SaveItem()
     {
@@ -51,6 +49,7 @@ else
         //await GetGuest();
         editRowStyle = "none";
     }
+    */
     public class Guest
     {
         public int id {get;set;}
