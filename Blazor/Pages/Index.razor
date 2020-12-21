@@ -1,6 +1,8 @@
 ﻿@page "/{Id:int}"
 @inject HttpClient Http
+@inject IJSRuntime JsRuntime;
 @using System.Net.Http
+
 
 @if (editGuest == null)
 {
@@ -31,7 +33,8 @@ else
         </div>
     </form>
 
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit" @onclick="SaveItem">Submit</button>
+    @Message
     </EditForm>
 }
 
@@ -39,17 +42,15 @@ else
 
     [Parameter]
     public Int32 Id { get; set; }
+    private String Message = "";
     private Guest editGuest = new Guest();
     protected override async Task OnInitializedAsync() => editGuest = await Http.GetFromJsonAsync<Guest>("api/Guest/" + Id.ToString());
-    /*    
-
+       
     private async Task SaveItem()
     {
-        await Http.PutAsJsonAsync($"/{editGuest.id}", editGuest);
-        //await GetGuest();
-        editRowStyle = "none";
+       Message = "Update Completed";
     }
-    */
+    
     public class Guest
     {
         public int id {get;set;}
