@@ -6,7 +6,7 @@
 
 @if (editGuest == null)
 {
-    <p>Guests Not found.</p>
+    <p><em>Loading...</em></p>
 }
 else
 {
@@ -15,19 +15,19 @@ else
     <DataAnnotationsValidator />
     <ValidationSummary />
     <form>
-        <div class="form-group  col-md-6">
+        <div class="form-group  col-md-4">
             <label for="name">Name</label>
             <InputText id="name" class="form-control" @bind-Value="editGuest.Name" />
         </div>
-        <div class="form-group  col-md-6">
+        <div class="form-group  col-md-4">
             <label for="Tel">Tel</label>
             <InputText id="Tel" class="form-control" @bind-Value="editGuest.Tel" />
         </div>
-        <div class="form-group  col-md-6">
+        <div class="form-group  col-md-4">
             <label for="Address">Address</label>
             <InputText id="Address" class="form-control" @bind-Value="editGuest.Address" />
         </div>
-        <div class="form-group  col-md-6">
+        <div class="form-group  col-md-4">
             <label for="Mail">Mail</label>
             <InputText id="Mail" class="form-control" @bind-Value="editGuest.Mail" />
         </div>
@@ -43,12 +43,13 @@ else
     [Parameter]
     public Int32 Id { get; set; }
     private String Message = "";
-    private Guest editGuest = new Guest();
+    private Guest editGuest = null;
     protected override async Task OnInitializedAsync() => editGuest = await Http.GetFromJsonAsync<Guest>("api/Guest/" + Id.ToString());
        
     private async Task SaveItem()
     {
-       Message = "Update Completed";
+        await Http.PutAsJsonAsync($"api/TodoItems/{editGuest.id}", editGuest);
+        Message = "Update Completed";
     }
     
     public class Guest
